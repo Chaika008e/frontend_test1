@@ -645,7 +645,7 @@ function Dashboard() {
                     >
                       <option value="">เลือกอาจารย์</option>
                       {teachers.map((t) => (
-                        <option key={t.id} value={t.id}>
+                        <option key={t.id} value={String(t.id)}>
                           {t.fullname}
                         </option>
                       ))}
