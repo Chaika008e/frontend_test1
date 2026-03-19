@@ -157,13 +157,21 @@ function Dashboard() {
   };
 
   const handleEdit = (item) => {
-    setEditingItem(item);
-    setFormData(item);
-    setError("");
-    setFieldErrors({});
-    setShowModal(true);
-  };
+  setEditingItem(item);
 
+  let data = { ...item };
+
+  // ถ้าเป็น subjects ให้หา teacher_id จากชื่ออาจารย์
+  if (activeTab === "subjects" && item.teacher_name) {
+    const matched = teachers.find((t) => t.fullname === item.teacher_name);
+    if (matched) data.teacher_id = matched.id;
+  }
+
+  setFormData(data);
+  setError("");
+  setFieldErrors({});
+  setShowModal(true);
+};
   const handleDelete = async (item) => {
     if (!confirm("คุณแน่ใจหรือไม่ที่จะลบข้อมูลนี้?")) return;
 
